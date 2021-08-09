@@ -1,0 +1,146 @@
+SOLID Principles In Java
+In Java, SOLID principles are an object-oriented approach that are applied to software structure design.
+The word SOLID Means:
+
+Single Responsibility Principle (SRP)
+Open-Closed Principle (OCP)
+Liskov Substitution Principle (LSP)
+Interface Segregation Principle (ISP)
+Dependency Inversion Principle (DIP)Single Responsibility Principle
+
+1.Single Responsibility principal:
+A class should do or hold one single responsibility/action
+Model-View-Controller
+Model-data or actor
+library:
+Book-Staff,computers
+Store-users-manager,admin,guest-they will use the store application
+products-item that are being sold
+Controller-login,register,purchase,generate invoice
+view- use the view as a medium to communicate
+Model-view-controller
+Beans-all models or actor
+
+Eg:Student.java:
+
+public class Student  
+{  
+public void printDetails();  
+{  
+//functionality of the method  
+}  
+pubic void calculatePercentage();  
+{  
+//functionality of the method  
+}  
+public void addStudent();  
+{  
+//functionality of the method  
+}  
+}  
+The above code perform the Single Functionality only.2 
+
+
+2.Open Closed Principles: 
+Open for extension and Closed for Modification
+Suppose, VehicleInfo is a class and it has the method vehicleNumber() that returns the vehicle number.
+
+VehicleInfo.java
+
+public class VehicleInfo  
+{  
+public double vehicleNumber(Vehicle vcl)   
+{  
+if (vcl instanceof Car)   
+{  
+return vcl.getNumber();  
+if (vcl instanceof Bike)   
+{  
+return vcl.getNumber();  
+}  
+}  
+If we want to add another subclass named Truck, simply, we add one more if statement that violates the open-closed principle.
+
+3.Liskov Substitution Principle:
+when we pass a parrent reference and child reference to a function it should return similar kind of solution
+public class Student   
+{  
+private double height;  
+private double weight;  
+public void setHeight(double h)   
+{   
+height = h;   
+}  
+public void setWeight(double w)   
+{   
+weight= w;   
+}  
+...  
+}  
+public class StudentBMI extends Student  
+{  
+public void setHeight(double h)   
+{  
+super.setHeight(h);  
+super.setWeight(w);  
+}  
+public void setWeight(double h)   
+{  
+super.setHeight(h);  
+super.setWeight(w);  
+}  
+}  
+
+
+4.Interface Segregation Principle:
+The principle states that the larger interfaces split into smaller ones. Because the implementation 
+The goal of the interface segregation principle is similar to the single responsibility principl
+
+
+public interface Conversion  
+{  
+public void intToDouble();  
+public void intToChar();  
+public void charToString();  
+}  
+The above interface has three methods. If we want to use only a method intToChar(), we have no choice to implement the single method. To overcome the problem, the principle allows us to split the interface into three separate ones.
+
+public interface ConvertIntToDouble  
+{  
+public void intToDouble();  
+}   
+public interface ConvertIntToChar  
+{  
+public void intToChar();  
+}  
+public interface ConvertCharToString   
+{  
+public void charToString();  
+}  
+Now we can use only the method that is required. Suppose, we want to convert the integer to double and character to string then, we will use only the methods intToDouble() and charToString().
+
+public class DataTypeConversion implements ConvertIntToDouble, ConvertCharToString   
+{  
+public void intToDouble()  
+{  
+//conversion logic  
+}  
+public void charToString()  
+{  
+//conversion logic  
+}  
+}  
+5.Dependency Inversion Principal:
+The principle states that we must use abstraction (abstract classes and interfaces) instead of concrete implementation.
+WindowsMachine.java
+
+public class WindowsMachine  
+{  
+private final Keyboard keyboard;  
+private final Monitor monitor;  
+public WindowsMachine(Keyboard keyboard, Monitor monitor)   
+{  
+this.keyboard = keyboard;  
+this.monitor = monitor;  
+}  
+}  
