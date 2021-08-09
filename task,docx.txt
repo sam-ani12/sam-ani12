@@ -1,0 +1,9 @@
+Differenece between String s="Hello" and String s=new Hello() whichis better?
+ANS: Jvm creates string object with a given value in a seperate block of memory
+String s=new Hello(): new object with the given value is created.
+so i think String s=new Hello() is better
+
+2.Why string is non primitive datatype?
+Ans:beacause only class can have method but primitive is not.
+3.why cannot we write ArrayList lst=new Arraylist();?
+Ans:we can write ArrayList lst=new Arralist() but it specift the datatype
