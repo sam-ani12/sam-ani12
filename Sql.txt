@@ -1,0 +1,389 @@
+ SQL INJECTION:sql injection is a code technique that might cause loss to our database.sql injection can be used to manipulate the application web server by malicious users.
+sql injection generally occurs when we ask a user to input their username/userid.instead of a name or id,the user gives us an sql statement that we we will unknowingly run on our database.
+For Example - we create a SELECT statement by adding a variable "samUserID" to select a string.
+samUserId = getrequestString("UserId");  
+samSQL = "SELECT * FROM users WHERE UserId="+samUserid;
+sql injection means injecting/inserting sql code in query.it can occur in any application using releational database like oracle ,mysql,postgresql and sql server.
+types of sql injection:
+1.Boolean based sql injection
+2.union based sql injection
+3.time based sql injection
+4.error based sql injection
+1.Boolean based sql injection:it uses a boolean expression that evaluates to true or false.
+2.union based sql injection:
+
+SQL union operator combines data from two different queries with the same number of columns. In this case, the union operator is used to get data from other tables
+Input Data: 2 union select username, password from tableuser
+Query:  Select first_name, last_name from tbl_employee where empId=2 union select username, password from tableuser
+
+3.time based sql injetion:
+this attack slows down the database server. It can bring down your application by affecting the database server performance.
+
+4.error based sql injection:
+this variation, the attacker tries to get information like an error code and a message from the database.
+
+2.statement : it uses this for general purposse access to your database.
+it useful when you are using static sql statements at runtime
+the statement interface cannot accept parameter.
+create statement
+executing a query via a statement
+executing an update via a statement
+closing a statement
+
+1.create statement:
+in java jdbc statement first we need to create a statement
+Statement statement = connection.createStatement();
+
+2.executing a query via a statement:
+Once you have created a Java Statement object, you can execute a query against the database.by calling its executequery()method,passing an sql statement as parameter.
+
+String sql = "select * from people";
+
+ResultSet result = statement.executeQuery(sql);
+
+while(result.next()) {
+
+ String name = result.getString("name");
+ long   age  = result.getLong  ("age");
+
+}
+
+3.execute and update via a statement:
+execute an update of database in a java jdbc statement instance.for instance execute an sqk insert, update,or delete via statement instance.
+Statement statement = connection.createStatement();
+
+String    sql       = "update people set name='John' where id=123";
+
+int rowsAffected    = statement.executeUpdate(sql);
+
+4.closing a statement:
+
+Once you are finished with a Statement instance you need to close it. You close a Statement instance by calling its close() method.
+statement.close();
+
+prepare statement:
+java JDBC PreparedStatement is a special kind of Java JDBC Statement object with some useful additional features.
+The Java JDBC PreparedStatement primary features are: 
+Easy to insert parameters into the SQL statement.
+ Easy to reuse the PreparedStatement with new parameter value
+String sql = "update people set firstname=? , lastname=? where id=?";
+
+PreparedStatement preparedStatement =connection.prepareStatement(sql);
+
+preparedStatement.setString(1, "Gary");
+preparedStatement.setString(2, "Larson");
+preparedStatement.setLong  (3, 123);
+
+int rowsAffected = preparedStatement.executeUpdate();
+creating a prepared statement:
+String sql = "select * from people where id=?";
+PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+ Inserting Parameters into a PreparedStatement:
+
+Everywhere you need to insert a parameter into your SQL, you write a question mark (?). For instance:
+ String sql = "select * from people where id=?";  
+
+executing the preparedstatement:
+the executeupdate() method is used when updating the database
+
+String sql = "update people set firstname=? , lastname=? where id=?";
+
+PreparedStatement preparedStatement =
+        connection.prepareStatement(sql);
+
+preparedStatement.setString(1, "Gary");
+preparedStatement.setString(2, "Larson");
+preparedStatement.setLong  (3, 123);
+
+int rowsAffected = preparedStatement.executeUpdate(); 
+
+resuing a preparedstatement:
+once a preparestatement is prepared it can be reused after the execution.
+
+String sql = "update people set firstname=? , lastname=? where id=?";
+
+PreparedStatement preparedStatement =
+        connection.prepareStatement(sql);
+
+preparedStatement.setString(1, "Gary");
+preparedStatement.setString(2, "Larson");
+preparedStatement.setLong  (3, 123);
+
+int rowsAffected = preparedStatement.executeUpdate();
+
+preparedStatement.setString(1, "Stan");
+preparedStatement.setString(2, "Lee");
+preparedStatement.setLong  (3, 456);
+
+int rowsAffected = preparedStatement.executeUpdate();
+
+    
+
+callable statement:
+The CallableStatement interface provides methods to execute the stored procedures. Since the JDBC API provides a stored procedure SQL escape syntax, you can call stored procedures of all RDBMS in single standard way.
+example:
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+public class CallableStatementExample {
+   public static void main(String args[]) throws SQLException {
+      
+      DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+
+
+      String mysqlUrl = "jdbc:mysql:
+      Connection con = DriverManager.getConnection(mysqlUrl, "root", "password");
+      System.out.println("Connection established......");
+  3
+      CallableStatement cstmt = con.prepareCall("{call myProcedure(?, ?, ?)}");
+
+      cstmt.setString(1, "Raghav");
+      cstmt.setInt(2, 3000);
+      cstmt.setString(3, "Hyderabad");
+
+      cstmt.setString(1, "Kalyan");
+      cstmt.setInt(2, 4000);
+      cstmt.setString(3, "Vishakhapatnam");
+
+      cstmt.setString(1, "Rukmini");
+      cstmt.setInt(2, 5000);
+      cstmt.setString(3, "Delhi");
+
+      cstmt.setString(1, "Archana");
+      cstmt.setInt(2, 15000);
+      cstmt.setString(3, "Mumbai");
+
+      cstmt.execute();
+      System.out.println("Rows inserted ....");
+   }
+}
+
+3.  Inner classes in java:
+1.Nested inner class
+2.method local inner classes
+3.Anonymous inner classes
+4.static nested classes
+1.Nested inner class:
+can access any private instance variable of outer class. Like any other instance variable, we can have access modifier private, protected, public and default modifier
+class Outer { 
+
+   class Inner { 
+
+      public void show() { 
+
+           System.out.println("In a nested class method"); 
+
+      } 
+
+   } 
+} 
+
+class Main { 
+
+   public static void main(String[] args) { 
+
+       Outer.Inner in = new Outer().new Inner(); 
+
+       in.show(); 
+}
+}
+2.Method local inner classes:
+inner class can be declared within a method of an outer class.
+example:
+class Outer { 
+
+    void outerMethod() { 
+
+        System.out.println("inside outerMethod"); 
+
+       
+
+        class Inner { 
+
+            void innerMethod() { 
+
+                System.out.println("inside innerMethod"); 
+
+            } 
+
+        } 
+
+        Inner y = new Inner(); 
+
+        y.innerMethod(); 
+
+    } 
+} 
+
+class MethodDemo { 
+
+    public static void main(String[] args) { 
+
+        Outer x = new Outer(); 
+
+        x.outerMethod(); 
+
+    } 
+}
+
+3.static nested classes:
+static nested classes are not an inner class.they are like a static member of outer class.
+example:
+class Outer { 
+
+   private static void outerMethod() { 
+
+     System.out.println("inside outerMethod"); 
+
+   } 
+
+   static class Inner { 
+
+     public static void main(String[] args) { 
+
+        System.out.println("inside inner class Method"); 
+
+        outerMethod(); 
+
+     } 
+
+   } 
+}
+4.Anonymous inner classes:Anonymous inner clases are declared with na,e to all
+created in two ways
+1.As subclass of specified type
+2.As implementer of the spexified interface
+1.as subclass of specified type:
+[10:48 PM, 8/17/2021] Samanvitha Rao: class Demo { 
+
+   void show() { 
+
+      System.out.println("i am in show method of super class"); 
+
+   } 
+} 
+
+class Flavor1Demo { 2.
+
+
+   static Demo d = new Demo() { 
+
+       void show() { 
+
+           super.show(); 
+
+           System.out.println("i am in Flavor1Demo class"); 
+
+       } 
+
+   }; 
+
+   public static void main(String[] args){ 
+
+       d.show(); 
+
+   } 
+}
+2.As implementer of the specified inerface
+ class Flavor2Demo { 
+
+    static Hello h = new Hello() { 
+
+        public void show() { 
+
+            System.out.println("i am in anonymous class"); 
+
+        } 
+
+    }; 
+
+  
+
+    public static void main(String[] args) { 
+
+        h.show(); 
+
+    } 
+} 
+
+  
+
+interface Hello { 
+
+    void show(); 
+}
+
+4.Relationships in java:
+1.IS-A RELATOINSHIP
+2.HAS-A RELATIONSHIP
+3.USES-A RELATIONSHIP
+
+  
+1.IS-A RELATIONSHIP:
+ Is-A relationship one class is obtaining the features of another class by using inheritance concept with extends keywords
+Example:
+class Faculty
+{  
+float salary=30000;  
+}  
+class Science extends Faculty
+{ 
+float bonous=2000;
+public static void main(String args[])
+{
+Science obj=new Science(); 
+System.out.println("Salary is:"+obj.salary);  
+System.out.println("Bonous is:"+obj.bonous);  
+}  
+
+2.HAS-A RELATIONSHIP:
+Has-A relationship an object of one class is created as data member in another class the relationship between these two classes is Has-A.
+example:
+class Employee
+{  
+float salary=30000;  
+}  
+class Developer extends Employee
+{ 
+float bonous=2000;
+public static void main(String args[])
+{
+Employee obj=new Employee();
+System.out.println("Salary is:"+obj.salary);  
+}  
+}
+3.USER-A RELATIONSHIP:
+ method of one class is using an object of another class the relationship between these two classes is kknown as user a relationship.
+
+class Employee
+{
+float salary=20000;
+}
+class Salary extends Employee
+{
+void disp()
+{
+float bonous=1000;
+Employee obj=new Employee();
+float Total=obj.salary+bonous;
+System.out.println("Total Salary is."+Total);
+]
+}
+class Developer
+[
+public static void main(Striing args[])
+{
+salary s=new Salary();
+s.disp()
+}
+}
+
+
+
+
+ 
+
+  
+      
