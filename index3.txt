@@ -1,0 +1,11 @@
+<html>
+<body>
+<form action="./login">
+Usrname:<input type="text" name="uname"/><br/>
+password:<input type="text" name="pwd"/><br/>
+Guest:<input type="text" name=""/><br/>
+<input type="submit" value="SUBMIT"/>
+
+</form>
+</body>
+</html>
