@@ -1,0 +1,67 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Webapp</title>
+<style>
+table,th,td{
+text-align:middle;
+border:0.001px solid black;
+border-collapse:collapse;
+}
+table{
+border-spacing:50px;
+}
+</style>
+<title>Page Title</title>
+<body>
+<form>
+<h1 style="color:green">Welcome to My Store</h1>
+User creation:<br>
+&emsp; &emsp;<span class="required-mark">*</span> All fields are mandatory
+<p style="color:red">&emsp;&emsp;&emsp; The following fields are missing<br>
+&emsp; &emsp;&emsp; User Name, Password, Balance</p><br>
+
+     &emsp;&emsp;UserName <span class="required-mark">*</span> &emsp;<input type="UserName"><br><br>
+     &emsp; &emsp;Password<span class="required-mark">*</span> &emsp;  <input type=  "Password"><br><br>
+     &emsp;&emsp; Card type<span class="required-mark">*</span>  
+     <ul type="circle"  >
+     <li>Credit</li>
+     <li>Debit</li>
+     </ul>
+    &emsp;&emsp; Balance <span class="required-mark">*</span> &emsp; <input type="number"><br><br><br>
+    &emsp;&emsp;&emsp; &emsp; &emsp;  <button type="button" onclick> Add </button>
+    <button type="button" onclick> Reset</button>
+      <br><br>
+      <table style="width:70%">
+      <tr>
+      <th>Name</th>
+      <th>Account Type</th>
+      <th>Balance/Limit</th>
+      </tr>
+      <tr>
+      <td>Ajay</td>
+      <td>Credit</td>
+      <td>1000</td>
+      </tr>
+      <tr>
+      <td>Bijay</td>
+      <td>Debit</td>
+      <td>200</td>
+      </tr>
+      <tr>
+      <td>Govind</td>
+      <td>Debit</td>
+      <td>345</td>
+      </tr>
+      <tr>
+      <td>Hari</td>
+      <td>Credit</td>
+      <td>1000</td>
+      </tr>
+      </table>
+</form>
+</body>
+</html>
